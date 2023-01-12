@@ -1,0 +1,55 @@
+#header {
+    border: 1px black solid;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    justify-items: center;
+    align-items: center;
+    padding: 10px;
+}
+
+#profilePic {
+    width: 50px;
+    grid-column: 4/5;
+}
+
+#logo {
+    width: 250px;
+}
+
+#searchBar {
+    justify-content: center;
+}
+
+.dirItem {
+    display: flex;
+    gap: 15px;
+    cursor: pointer;
+}
+
+#directoryZone {
+    display: grid;
+    grid-template-columns: 600px 600px 600px 600px 600px;
+    overflow-x: scroll;
+    height: 200px;
+}
+
+#mainPage {
+    display: grid;
+    
+    grid-template-columns: 75% 25%;
+}
+
+#uploadBtn {
+    position: absolute;
+    left: 0;
+    margin-left: 20px;
+}
+
+#upBar {
+    justify-content: center;
+}
+
+#itemInfo {
+    background-color: bisque;
+    z-index: 2;
+}
