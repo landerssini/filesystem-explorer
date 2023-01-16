@@ -1,5 +1,5 @@
 <?php
-include 'dbh.php';
+// include 'dbh.php';
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +21,7 @@ include 'dbh.php';
         <a href="index.php"><img src="assets/logo.png" alt="logo" id="logo"></a>
         <img src="assets/profilePic.png" class="rounded" alt="profilePic" id="profilePic">
     </div>
-    <nav class="navbar navbar-light bg-light" id="searchBar">
+    <nav class="navbar navbar-light bg-light" id="upBar">
 
         <form class="d-flex" action='upload.php' method='POST' enctype='multipart/form-data'>
             <input class="form-control me-2" type="file" name="file">
@@ -40,7 +40,8 @@ include 'dbh.php';
 
     </nav>
     <div id="mainPage">
-        <div id="directory">
+        <div id="directoryZone">
+            <div id="directoryHome">
             <?php
             $path = 'uploads/';
             $files = array_values(array_diff(scandir($path), array('.', '..')));
@@ -90,7 +91,7 @@ include 'dbh.php';
                     default:
                         $icono = "folder";
                 };
-                echo '<li class="list-group-item" id="dirItem">
+                echo '<li class="list-group-item dirItem">
                       <span class="material-symbols-outlined">' . $icono . '</span> 
                       <span><a href="'.$path.$file.'">'.$file.'</a></span>
                       <form action="delete.php" method="post">
@@ -110,9 +111,16 @@ include 'dbh.php';
             };
             echo '</ul>';
             ?>
+            </div>
+            <div>
+               
+            </div>
+            <div>
+                
+            </div>
         </div>
         <div id="itemInfo">
-            <h1></h1>
+            <h1>hola</h1>
         </div>
     </div>
 </body>
