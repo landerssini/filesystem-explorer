@@ -28,9 +28,9 @@ if(isset($_POST['submit'])){
             //Checking,The file size is bellow than the allowed file size
             if($fileSize < 10000000){
                 //Creating a unique name for file
-                $fileNemeNew = uniqid('',true).".".$fileActualExt;
+                // $fileNemeNew = uniqid('',true).".".$fileActualExt;
                 //File destination
-                $fileDestination = 'uploads/'.$fileNemeNew;
+                $fileDestination = 'uploads/'.$fileName;
                 //function to move temp location to permanent location
                 move_uploaded_file($fileTempName, $fileDestination);
                 //Message after success
