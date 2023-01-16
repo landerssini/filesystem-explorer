@@ -53,4 +53,13 @@
 #itemInfo {
     background-color: bisque;
     z-index: 2;
+    text-align: center;
+    padding: 62px;
+    
+}
+#itemInfo h3 {
+    margin: 0;
+}
+#itemInfo h4 {
+    margin-bottom: 45px;
 }

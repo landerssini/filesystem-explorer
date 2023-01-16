@@ -96,34 +96,38 @@
                         default:
                             $icono = "draft";
                     };
-                    echo '<li class="list-group-item dirItem" value="' . $path . $file . '" icon="' . $icono . '" file="' . $file . '" size="' . $fileSize . '" date="' . $fileDate . '">
+                    echo '<li class="list-group-item dirItem" value="'.$path.'" icon="' . $icono . '" file="' . $file . '" size="' . $fileSize . '" date="' . $fileDate . '">
                       <span class="material-symbols-outlined">' . $icono . '</span> 
                       <span><a href="' . $path . $file . '">' . $file . '</a></span>
                       <span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="'.$file.'" path="'.$path.'">delete</span>
-                      
-                      <form action="rename.php" method="post">
-                        <input type="hidden" name="value" value="' . $path . $file . '">
-                        <input type="text" name="rename">
-                        <button class="btn btn-primary" type="submit">Rename</button>
-                     </form>
-
+                      <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="'.$file.'" path="'.$path.'">edit</span>
                   </li>';
                 };
                 echo '</ul>';
                 ?>
             </div>
-            <div>
+            <div id="directory1">
 
             </div>
-            <div>
+            <div id="directory2">
+
+            </div>
+            <div id="directory3">
+
+            </div>
+            <div id="directory4">
 
             </div>
         </div>
         <div id="itemInfo">
             <span class="material-symbols-outlined" id="iconInfo"></span>
             <h2 id="titleInfo"></h2>
-            <h3 id="sizeInfo"></h3>
-            <h3 id="dateInfo"></h3>
+            <h3>Size:</h3><h4 id="sizeInfo"></h4>
+            <h3>Path:</h3><h4 id="pathInfo"></h4>
+            <h3>Modify date:</h3><h4 id="dateInfo"></h4>
+            <h3>Actions:</h3>
+            <div id="actionBtns"></div>
+            el color este rancio se quita, es para ver que abarca el div :)
 
         </div>
     </div>
