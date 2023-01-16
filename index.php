@@ -12,7 +12,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
     <title>Files Explorer</title>
 </head>
 
@@ -91,7 +90,7 @@
                     default:
                         $icono = "folder";
                 };
-                echo '<li class="list-group-item dirItem" value="'.$path.$file.'">
+                echo '<li class="list-group-item dirItem" value="'.$path.$file.'" icon="'.$icono.'" file="'.$file.'">
                       <span class="material-symbols-outlined">' . $icono . '</span> 
                       <span><a href="'.$path.$file.'">'.$file.'</a></span>
                       <form action="delete.php" method="post">
@@ -120,9 +119,14 @@
             </div>
         </div>
         <div id="itemInfo">
-            <h1>hola</h1>
+        <span class="material-symbols-outlined" id="iconInfo"></span>
+        <h2 id="titleInfo"></h2>
+        <h3 id="sizeInfo"></h3>
+        
         </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
