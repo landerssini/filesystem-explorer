@@ -107,15 +107,16 @@
                 ?>
             </div>
             <div id="directory1">
+                <ul id="directory1ul"></ul>
             </div>
             <div id="directory2">
-
+                <ul id="directory2ul"></ul>
             </div>
             <div id="directory3">
-
+                <ul id="directory3ul"></ul>
             </div>
             <div id="directory4">
-
+                <ul id="directory4ul"></ul>
             </div>
         </div>
         <div id="itemInfo">

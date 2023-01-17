@@ -73,3 +73,6 @@
         display: flex;
         gap: 10px; 
 }
+ul {
+    padding-left: 0;
+}

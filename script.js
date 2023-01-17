@@ -13,22 +13,22 @@ let dateInfo = document.querySelector("#dateInfo")
 let modalTitle = document.querySelector("#modal-title")
 let modalBody = document.querySelector("#modal-body")
 let actionBtn = document.querySelector("#action-btn")
-let directory1 = document.querySelector("#directory1")
-let directory2 = document.querySelector("#directory2")
-let directory3 = document.querySelector("#directory3")
-let directory4 = document.querySelector("#directory4")
+let directory1 = document.querySelector("#directory1ul")
+let directory2 = document.querySelector("#directory2ul")
+let directory3 = document.querySelector("#directory3ul")
+let directory4 = document.querySelector("#directory4ul")
 let actionBtns = document.querySelector("#actionBtns")
 let itemInfo = document.querySelector("#itemInfo")
 let mainPage = document.querySelector("#mainPage")
-
+let counter
 
 function fillDirectory(icon, path, name) {
   if (!icon == " ") {
-    directory1.innerHTML += `<ul>`
+    
     fetch(`get_files.php?directory=${path}/${name}`)
       .then(response => response.json())
       .then(data => {
-       
+       if (counter==1) {
         for (let i = 0; i < data.length; i++) {
           directory1.innerHTML += `<li class="list-group-item dirItem" value="${path}${data[i].file}" icon="${data[i].icono}" file="${data[i].file}" size="${data[i].fileSize}" date="${data[i].fileDate}">
         <div class="dirItemBOX"><span class="material-symbols-outlined">${data[i].icono}</span> 
@@ -37,13 +37,18 @@ function fillDirectory(icon, path, name) {
           <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${data[i].file}" path="${path}">edit</span></div>
       </li>`
         }
+        counter=0
+       } else {
+        counter=1
+       }
+        
         
         assignRenameBtn()
         assignDeleteBtn()
         assignBtns()
         console.log(data);
       });
-      directory1.innerHTML += `</ul>`
+      
   }
 }
 
