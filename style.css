@@ -37,7 +37,7 @@
 
 #mainPage {
     display: grid;
-    grid-template-columns: 75% 25%;
+    grid-template-columns: 100%;
 }
 
 #uploadBtn {
@@ -56,6 +56,7 @@
     z-index: 2;
     text-align: center;
     padding: 62px;
+    display: none;
     
 }
 #itemInfo h3 {

@@ -18,73 +18,32 @@ let directory2 = document.querySelector("#directory2")
 let directory3 = document.querySelector("#directory3")
 let directory4 = document.querySelector("#directory4")
 let actionBtns = document.querySelector("#actionBtns")
+let itemInfo = document.querySelector("#itemInfo")
+let mainPage = document.querySelector("#mainPage")
+
 
 function fillDirectory(icon, path, name) {
-  if (icon == "") {
-    directory1.innerHTML = `<?php
-    $path = ${path}${name};;
-  
-    $files = array_values(array_diff(scandir($path), array('.', '..')));
-    echo '<ul class="list-group">';
-    foreach ($files as $file) {
-        $extension = pathinfo($file, PATHINFO_EXTENSION);
-        $fileSize = filesize($path . $file);
-        $fileDate = date('Y-m-d H:i:s', filemtime($path . $file));
-        switch ($extension) {
-            case "txt":
-                $icono = "notes";
-                break;
-            case "doc":
-            case "docx":
-                $icono = "description";
-                break;
-            case "pdf":
-                $icono = "picture_as_pdf";
-                break;
-            case "csv":
-                $icono = "border_all";
-                break;
-            case "jpg":
-            case "png":
-                $icono = "image";
-                break;
-            case "ppt":
-                $icono = "co_present";
-                break;
-            case "odt":
-                $icono = "description";
-                break;
-            case "zip":
-            case "rar":
-                $icono = "folder_zip";
-                break;
-            case "exe":
-                $icono = "terminal";
-                break;
-            case "svg":
-                $icono = "polyline";
-                break;
-            case "mp3":
-                $icono = "graphic_eq";
-                break;
-            case "mp4":
-                $icono = "smart_display";
-                break;
-            case "":
-                $icono = "folder";
-                break;
-            default:
-                $icono = "draft";
-        };
-        echo '<li class="list-group-item dirItem" value="' . $path . $file . '" icon="' . $icono . '" file="' . $file . '" size="' . $fileSize . '" date="' . $fileDate . '">
-          <span class="material-symbols-outlined">' . $icono . '</span> 
-          <span><a href="' . $path . $file . '">' . $file . '</a></span>
-          <span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="'.$file.'" path="'.$path.'">delete</span>
-          <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="'.$file.'" path="'.$path.'">edit</span>
-      </li>';
-    };
-    echo '</ul>';
-    ?>`
+  if (!icon == " ") {
+    directory1.innerHTML += `<ul>`
+    fetch(`get_files.php?directory=${path}/${name}`)
+      .then(response => response.json())
+      .then(data => {
+       
+        for (let i = 0; i < data.length; i++) {
+          directory1.innerHTML += `<li class="list-group-item dirItem" value="${path}${data[i].file}" icon="${data[i].icono}" file="${data[i].file}" size="${data[i].fileSize}" date="${data[i].fileDate}">
+        <div class="dirItemBOX"><span class="material-symbols-outlined">${data[i].icono}</span> 
+          <span><a href="${path}${data[i].file}">${data[i].file}</a></span></div>
+          <div class="dirItemBOX" ><span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${data[i].file}" path="${path}">delete</span>
+          <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${data[i].file}" path="${path}">edit</span></div>
+      </li>`
+        }
+        
+        assignRenameBtn()
+        assignDeleteBtn()
+        assignBtns()
+        console.log(data);
+      });
+      directory1.innerHTML += `</ul>`
   }
 }
 
@@ -106,6 +65,8 @@ function bytesToSize(bytes) {
   return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
 }
 function checkDirFile(path, name, icon, size, date) {
+  itemInfo.style.display = "block"
+  mainPage.style.gridTemplateColumns = "75% 25%"
   titleInfo.innerHTML = `${name}`
   iconInfo.innerHTML = `${icon}`
   sizeInfo.innerHTML = `${size}`
@@ -115,19 +76,22 @@ function checkDirFile(path, name, icon, size, date) {
   <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${name}" path="${path}">edit</span>`
   assignRenameBtn()
   assignDeleteBtn()
+  fillDirectory(icon, path, name)
 }
 
-var items = document.querySelectorAll(".dirItem");
-for (var i = 0; i < items.length; i++) {
-  items[i].addEventListener("click", function () {
-    filePath = this.getAttribute("value")
-    fileName = this.getAttribute("file")
-    fileIcon = this.getAttribute("icon")
-    fileSize = this.getAttribute("size")
-    fileSize = bytesToSize(fileSize)
-    fileDate = this.getAttribute("date")
-    checkDirFile(filePath, fileName, fileIcon, fileSize, fileDate);
-  });
+function assignBtns() {
+  var items = document.querySelectorAll(".dirItem");
+  for (var i = 0; i < items.length; i++) {
+    items[i].addEventListener("click", function () {
+      filePath = this.getAttribute("value")
+      fileName = this.getAttribute("file")
+      fileIcon = this.getAttribute("icon")
+      fileSize = this.getAttribute("size")
+      fileSize = bytesToSize(fileSize)
+      fileDate = this.getAttribute("date")
+      checkDirFile(filePath, fileName, fileIcon, fileSize, fileDate)
+    });
+  }
 }
 function assignDeleteBtn() {
   deleteItems = document.querySelectorAll(".deleteBtn")
@@ -164,3 +128,4 @@ function assignRenameBtn() {
 }
 assignRenameBtn()
 assignDeleteBtn()
+assignBtns()
