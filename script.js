@@ -71,6 +71,7 @@ function bytesToSize(bytes) {
   if (i == 0) return bytes + ' ' + sizes[i];
   return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
 }
+
 function checkDirFile(path, name, icon, size, date) {
   itemInfo.style.display = "block"
   mainPage.style.gridTemplateColumns = "75% 25%"
@@ -86,7 +87,8 @@ function checkDirFile(path, name, icon, size, date) {
   fillDirectory(icon, path, name)
 }
 
-function assignBtns() {
+function assignBtns(flag, SearchResults) {
+if (flag) {
   var items = document.querySelectorAll(".dirItem");
   for (var i = 0; i < items.length; i++) {
     items[i].addEventListener("click", function () {
@@ -99,7 +101,20 @@ function assignBtns() {
       checkDirFile(filePath, fileName, fileIcon, fileSize, fileDate)
     });
   }
-}
+} else { 
+  for (let i = 0; i < SearchResults.length; i++) {
+    console.log('hola')
+    let filePath2 = SearchResults.name;
+    let fileName2 = SearchResults.name;
+    // fileIcon = this.getAttribute("icon")
+    let fileSize2 = SearchResults.size;
+    fileSize2 = bytesToSize(fileSize2)
+    let fileDate2 = SearchResults.date;
+    console.log(filepath2)
+    checkDirFile(filePath2, fileName2, fileIcon2, fileSize2, fileDate2)
+  };
+}}
+
 function assignDeleteBtn() {
   deleteItems = document.querySelectorAll(".deleteBtn")
   for (var i = 0; i < deleteItems.length; i++) {
@@ -133,6 +148,74 @@ function assignRenameBtn() {
     })
   }
 }
+
+const form = document.getElementById("searchForm");
+form.addEventListener("submit", searchResults);
+
+function searchResults (e) {
+  e.preventDefault(); // prevent the form from submitting
+  const input = e.target.querySelector("input[type='text']");
+  const inputValue = input.value;
+  // const url = "uploads/";
+  // const data2 = {'search': inputValue};
+
+  // "modules/searchByName.php" +
+  // "?" +
+  // "path=" +
+  // path +
+  // "&" +
+  // "textToSearch=" +
+  // textToSearch,
+  
+  // console.log(data2);
+    url = `"http://localhost/indexer/search.php?path=uploads/&search=${inputValue}"`;
+    console.log(url);
+    
+    // Use the fetch API to send the POST request
+    fetch(`http://localhost/indexer/search.php?path=uploads/&search=${inputValue}`)
+        .then(response => response.json())
+        .then(data => {
+          
+            
+            const arrElements = Object.entries(data);
+            
+            let father = document.querySelector('#directory1ul');
+            
+            for (let i = 0; i < arrElements.length; i++) {
+              
+              let item = arrElements[i];
+              console.log(item)
+              let itemReal = item[1];
+              
+              let name = itemReal.name;
+              console.log(name)
+              let size = itemReal.size;
+              console.log(size)
+              let date = itemReal.lastModify;
+
+              father.innerHTML += `'<li class="list-group-item dirItem" value="${name}" icon="" file="'${name}'" size="${size}" date="${date}">
+                <div class="dirItemBOX"><span class="material-symbols-outlined"></span> 
+                <span><a href="uploads/${name}">"${name}"</a></span></div>
+                <div class="dirItemBOX" ><span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${name}" path="uploads/${name}">delete</span>
+                <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${name}" path="uploads/${name}">edit</span></div>
+            </li>'`;
+            }
+            
+            // Do something with the data returned from the server
+            // assignBtns(false, data);
+        })
+        .catch(error => {
+            // Handle any errors that occurred during the request
+            // console.error(error);
+        }); // gets the value of the text input
+  // Do something with the inputValue
+};
+
+
+
+
+
+
 assignRenameBtn()
 assignDeleteBtn()
-assignBtns()
+assignBtns(true)

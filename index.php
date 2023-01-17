@@ -26,7 +26,7 @@
             <input class="form-control me-2" type="file" name="file">
             <button class="btn btn-outline-success mr-4" type="submit" name='submit'>Upload</button>
         </form>
-        <form class="d-flex" action='search.php' method='GET'>
+        <form class="d-flex" id="searchForm"> 
             <input class="form-control me-2" type="text" name='search' placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success" type="submit" name='search'>Search</button>
         </form>
