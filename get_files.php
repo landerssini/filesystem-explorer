@@ -1,7 +1,7 @@
 <?php
 
 $directory = $_GET['directory'];
-$files = scandir($directory);
+$files = array_values(array_diff(scandir($directory), array('.', '..')));
 $filesInfo = array();
 foreach ($files as $file) {
 

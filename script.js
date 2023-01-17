@@ -20,35 +20,37 @@ let directory4 = document.querySelector("#directory4ul")
 let actionBtns = document.querySelector("#actionBtns")
 let itemInfo = document.querySelector("#itemInfo")
 let mainPage = document.querySelector("#mainPage")
-let counter
+var counter
 
 function fillDirectory(icon, path, name) {
-  if (!icon == " ") {
-    
+
+  if (icon == "folder") {
+
     fetch(`get_files.php?directory=${path}/${name}`)
       .then(response => response.json())
       .then(data => {
-       if (counter==1) {
-        for (let i = 0; i < data.length; i++) {
-          directory1.innerHTML += `<li class="list-group-item dirItem" value="${path}${data[i].file}" icon="${data[i].icono}" file="${data[i].file}" size="${data[i].fileSize}" date="${data[i].fileDate}">
+
+        if (!(counter == name)) {
+          for (let i = 0; i < data.length; i++) {
+            directory1.innerHTML += `<li class="list-group-item dirItem" value="${path}${data[i].file}" icon="${data[i].icono}" file="${data[i].file}" size="${data[i].fileSize}" date="${data[i].fileDate}">
         <div class="dirItemBOX"><span class="material-symbols-outlined">${data[i].icono}</span> 
           <span><a href="${path}${data[i].file}">${data[i].file}</a></span></div>
           <div class="dirItemBOX" ><span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${data[i].file}" path="${path}">delete</span>
           <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${data[i].file}" path="${path}">edit</span></div>
       </li>`
+          }
+          counter = name
+          assignBtns()
+          assignRenameBtn()
+          assignDeleteBtn()
+        } else {
+          console.log("hola");
         }
-        counter=0
-       } else {
-        counter=1
-       }
         
-        
-        assignRenameBtn()
-        assignDeleteBtn()
-        assignBtns()
-        console.log(data);
-      });
-      
+      })
+
+  } else {
+    console.log(icon);
   }
 }
 
