@@ -96,58 +96,313 @@
                         default:
                             $icono = "draft";
                     };
-                    echo '<li class="list-group-item dirItem" value="'.$path.'" icon="' . $icono . '" file="' . $file . '" size="' . $fileSize . '" date="' . $fileDate . '">
-                      <span class="material-symbols-outlined">' . $icono . '</span> 
-                      <span><a href="' . $path . $file . '">' . $file . '</a></span>
-                      <span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="'.$file.'" path="'.$path.'">delete</span>
-                      <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="'.$file.'" path="'.$path.'">edit</span>
+                    echo '<li class="list-group-item dirItem" value="' . $path . '" icon="' . $icono . '" file="' . $file . '" size="' . $fileSize . '" date="' . $fileDate . '">
+                    <div class="dirItemBOX"><span class="material-symbols-outlined">' . $icono . '</span> 
+                      <span><a href="' . $path . $file . '">' . $file . '</a></span></div>
+                      <div class="dirItemBOX" ><span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">delete</span>
+                      <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">edit</span></div>
                   </li>';
                 };
                 echo '</ul>';
                 ?>
             </div>
             <div id="directory1">
+            <?php
+                $path = 'uploads/';
 
+                $files = array_values(array_diff(scandir($path), array('.', '..')));
+                echo '<ul class="list-group">';
+                foreach ($files as $file) {
+                    $extension = pathinfo($file, PATHINFO_EXTENSION);
+                    $fileSize = filesize($path . $file);
+                    $fileDate = date('Y-m-d H:i:s', filemtime($path . $file));
+                    switch ($extension) {
+                        case "txt":
+                            $icono = "notes";
+                            break;
+                        case "doc":
+                        case "docx":
+                            $icono = "description";
+                            break;
+                        case "pdf":
+                            $icono = "picture_as_pdf";
+                            break;
+                        case "csv":
+                            $icono = "border_all";
+                            break;
+                        case "jpg":
+                        case "png":
+                            $icono = "image";
+                            break;
+                        case "ppt":
+                            $icono = "co_present";
+                            break;
+                        case "odt":
+                            $icono = "description";
+                            break;
+                        case "zip":
+                        case "rar":
+                            $icono = "folder_zip";
+                            break;
+                        case "exe":
+                            $icono = "terminal";
+                            break;
+                        case "svg":
+                            $icono = "polyline";
+                            break;
+                        case "mp3":
+                            $icono = "graphic_eq";
+                            break;
+                        case "mp4":
+                            $icono = "smart_display";
+                            break;
+                        case "":
+                            $icono = "folder";
+                            break;
+                        default:
+                            $icono = "draft";
+                    };
+                    echo '<li class="list-group-item dirItem" value="' . $path . '" icon="' . $icono . '" file="' . $file . '" size="' . $fileSize . '" date="' . $fileDate . '">
+                    <div class="dirItemBOX"><span class="material-symbols-outlined">' . $icono . '</span> 
+                      <span><a href="' . $path . $file . '">' . $file . '</a></span></div>
+                      <div class="dirItemBOX" ><span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">delete</span>
+                      <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">edit</span></div>
+                  </li>';
+                };
+                echo '</ul>';
+                ?>
             </div>
             <div id="directory2">
+<?php
+                $path = 'uploads/';
 
+                $files = array_values(array_diff(scandir($path), array('.', '..')));
+                echo '<ul class="list-group">';
+                foreach ($files as $file) {
+                    $extension = pathinfo($file, PATHINFO_EXTENSION);
+                    $fileSize = filesize($path . $file);
+                    $fileDate = date('Y-m-d H:i:s', filemtime($path . $file));
+                    switch ($extension) {
+                        case "txt":
+                            $icono = "notes";
+                            break;
+                        case "doc":
+                        case "docx":
+                            $icono = "description";
+                            break;
+                        case "pdf":
+                            $icono = "picture_as_pdf";
+                            break;
+                        case "csv":
+                            $icono = "border_all";
+                            break;
+                        case "jpg":
+                        case "png":
+                            $icono = "image";
+                            break;
+                        case "ppt":
+                            $icono = "co_present";
+                            break;
+                        case "odt":
+                            $icono = "description";
+                            break;
+                        case "zip":
+                        case "rar":
+                            $icono = "folder_zip";
+                            break;
+                        case "exe":
+                            $icono = "terminal";
+                            break;
+                        case "svg":
+                            $icono = "polyline";
+                            break;
+                        case "mp3":
+                            $icono = "graphic_eq";
+                            break;
+                        case "mp4":
+                            $icono = "smart_display";
+                            break;
+                        case "":
+                            $icono = "folder";
+                            break;
+                        default:
+                            $icono = "draft";
+                    };
+                    echo '<li class="list-group-item dirItem" value="' . $path . '" icon="' . $icono . '" file="' . $file . '" size="' . $fileSize . '" date="' . $fileDate . '">
+                    <div class="dirItemBOX"><span class="material-symbols-outlined">' . $icono . '</span> 
+                      <span><a href="' . $path . $file . '">' . $file . '</a></span></div>
+                      <div class="dirItemBOX" ><span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">delete</span>
+                      <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">edit</span></div>
+                  </li>';
+                };
+                echo '</ul>';
+                ?>
             </div>
             <div id="directory3">
+<?php
+                $path = 'uploads/';
 
+                $files = array_values(array_diff(scandir($path), array('.', '..')));
+                echo '<ul class="list-group">';
+                foreach ($files as $file) {
+                    $extension = pathinfo($file, PATHINFO_EXTENSION);
+                    $fileSize = filesize($path . $file);
+                    $fileDate = date('Y-m-d H:i:s', filemtime($path . $file));
+                    switch ($extension) {
+                        case "txt":
+                            $icono = "notes";
+                            break;
+                        case "doc":
+                        case "docx":
+                            $icono = "description";
+                            break;
+                        case "pdf":
+                            $icono = "picture_as_pdf";
+                            break;
+                        case "csv":
+                            $icono = "border_all";
+                            break;
+                        case "jpg":
+                        case "png":
+                            $icono = "image";
+                            break;
+                        case "ppt":
+                            $icono = "co_present";
+                            break;
+                        case "odt":
+                            $icono = "description";
+                            break;
+                        case "zip":
+                        case "rar":
+                            $icono = "folder_zip";
+                            break;
+                        case "exe":
+                            $icono = "terminal";
+                            break;
+                        case "svg":
+                            $icono = "polyline";
+                            break;
+                        case "mp3":
+                            $icono = "graphic_eq";
+                            break;
+                        case "mp4":
+                            $icono = "smart_display";
+                            break;
+                        case "":
+                            $icono = "folder";
+                            break;
+                        default:
+                            $icono = "draft";
+                    };
+                    echo '<li class="list-group-item dirItem" value="' . $path . '" icon="' . $icono . '" file="' . $file . '" size="' . $fileSize . '" date="' . $fileDate . '">
+                    <div class="dirItemBOX"><span class="material-symbols-outlined">' . $icono . '</span> 
+                      <span><a href="' . $path . $file . '">' . $file . '</a></span></div>
+                      <div class="dirItemBOX" ><span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">delete</span>
+                      <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">edit</span></div>
+                  </li>';
+                };
+                echo '</ul>';
+                ?>
             </div>
             <div id="directory4">
+<?php
+                $path = 'uploads/';
 
+                $files = array_values(array_diff(scandir($path), array('.', '..')));
+                echo '<ul class="list-group">';
+                foreach ($files as $file) {
+                    $extension = pathinfo($file, PATHINFO_EXTENSION);
+                    $fileSize = filesize($path . $file);
+                    $fileDate = date('Y-m-d H:i:s', filemtime($path . $file));
+                    switch ($extension) {
+                        case "txt":
+                            $icono = "notes";
+                            break;
+                        case "doc":
+                        case "docx":
+                            $icono = "description";
+                            break;
+                        case "pdf":
+                            $icono = "picture_as_pdf";
+                            break;
+                        case "csv":
+                            $icono = "border_all";
+                            break;
+                        case "jpg":
+                        case "png":
+                            $icono = "image";
+                            break;
+                        case "ppt":
+                            $icono = "co_present";
+                            break;
+                        case "odt":
+                            $icono = "description";
+                            break;
+                        case "zip":
+                        case "rar":
+                            $icono = "folder_zip";
+                            break;
+                        case "exe":
+                            $icono = "terminal";
+                            break;
+                        case "svg":
+                            $icono = "polyline";
+                            break;
+                        case "mp3":
+                            $icono = "graphic_eq";
+                            break;
+                        case "mp4":
+                            $icono = "smart_display";
+                            break;
+                        case "":
+                            $icono = "folder";
+                            break;
+                        default:
+                            $icono = "draft";
+                    };
+                    echo '<li class="list-group-item dirItem" value="' . $path . '" icon="' . $icono . '" file="' . $file . '" size="' . $fileSize . '" date="' . $fileDate . '">
+                    <div class="dirItemBOX"><span class="material-symbols-outlined">' . $icono . '</span> 
+                      <span><a href="' . $path . $file . '">' . $file . '</a></span></div>
+                      <div class="dirItemBOX" ><span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">delete</span>
+                      <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">edit</span></div>
+                  </li>';
+                };
+                echo '</ul>';
+                ?>
             </div>
         </div>
         <div id="itemInfo">
             <span class="material-symbols-outlined" id="iconInfo"></span>
             <h2 id="titleInfo"></h2>
-            <h3>Size:</h3><h4 id="sizeInfo"></h4>
-            <h3>Path:</h3><h4 id="pathInfo"></h4>
-            <h3>Modify date:</h3><h4 id="dateInfo"></h4>
+            <h3>Size:</h3>
+            <h4 id="sizeInfo"></h4>
+            <h3>Path:</h3>
+            <h4 id="pathInfo"></h4>
+            <h3>Modify date:</h3>
+            <h4 id="dateInfo"></h4>
             <h3>Actions:</h3>
             <div id="actionBtns"></div>
             el color este rancio se quita, es para ver que abarca el div :)
 
         </div>
     </div>
-    <div class="modal fade" id="modal" tabindex="-1"  aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal-title"></h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body" id="modal-body">
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <div id="action-btn"></div>
-      </div>
+    <div class="modal fade" id="modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <div id="action-btn"></div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
