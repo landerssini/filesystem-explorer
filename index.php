@@ -96,10 +96,11 @@
                         default:
                             $icono = "draft";
                     };
-                    echo '<li class="list-group-item dirItem" value="' . $path . '" icon="' . $icono . '" file="' . $file . '" size="' . $fileSize . '" date="' . $fileDate . '">
+                    echo '<li class="list-group-item dirItem" value="' . $path . '" icon="' . $icono . '" file="' . $file . '" extension="' . $extension . '"size="' . $fileSize . '" date="' . $fileDate . '">
                     <div class="dirItemBOX"><span class="material-symbols-outlined">' . $icono . '</span> 
                       <span><a href="' . $path . $file . '">' . $file . '</a></span></div>
                       <div class="dirItemBOX" ><span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">delete</span>
+                      <span class="material-symbols-outlined play"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">play_arrow</span>
                       <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="' . $file . '" path="' . $path . '">edit</span></div>
                   </li>';
                 };

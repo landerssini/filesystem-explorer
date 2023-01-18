@@ -81,7 +81,7 @@ function checkDirFile(path, name, icon, size, date, extension) {
   sizeInfo.innerHTML = `${size}`
   dateInfo.innerHTML = `${date}`
   pathInfo.innerHTML = `${path}${name}`
-  extensionInfo.innerHTML = `${extension}`
+  // extensionInfo.innerHTML = `${extension}`
   
   actionBtns.innerHTML = `<span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${name}" path="${path}">delete</span>
   <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${name}" path="${path}">edit</span>`
@@ -153,6 +153,25 @@ function assignRenameBtn() {
   }
 }
 
+function playVideo() {
+  play = document.querySelectorAll(".play")
+  for (var i = 0; i < play.length; i++) {
+    play[i].addEventListener("click", function () {
+      fileName = this.getAttribute("file")
+      filePath = this.getAttribute("path")
+      extension = this.getAttribute("extension")
+      modalTitle.innerHTML = `Play video`
+      modalBody.innerHTML = `<video class="w-100" controls>
+      <source src="${filePath}/${fileName}" type="video/mp4">
+      Your browser does not support the video element.
+    </video>
+ `
+    })
+  }
+}
+
+
+
 const form = document.getElementById("searchForm");
 form.addEventListener("submit", searchResults);
 
@@ -211,3 +230,5 @@ function searchResults (e) {
 assignRenameBtn()
 assignDeleteBtn()
 assignBtns(true)
+playVideo()
+
