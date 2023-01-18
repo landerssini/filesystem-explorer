@@ -64,6 +64,7 @@ function deleteFile(file_path) {
   xhttp.open("GET", "delete.php?file_path=" + file_path, true);
   xhttp.send();
 }
+
 function bytesToSize(bytes) {
   var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
   if (bytes == 0) return 'n/a';
@@ -72,7 +73,7 @@ function bytesToSize(bytes) {
   return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
 }
 
-function checkDirFile(path, name, icon, size, date) {
+function checkDirFile(path, name, icon, size, date, extension) {
   itemInfo.style.display = "block"
   mainPage.style.gridTemplateColumns = "75% 25%"
   titleInfo.innerHTML = `${name}`
@@ -80,6 +81,8 @@ function checkDirFile(path, name, icon, size, date) {
   sizeInfo.innerHTML = `${size}`
   dateInfo.innerHTML = `${date}`
   pathInfo.innerHTML = `${path}${name}`
+  extensionInfo.innerHTML = `${extension}`
+  
   actionBtns.innerHTML = `<span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${name}" path="${path}">delete</span>
   <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${name}" path="${path}">edit</span>`
   assignRenameBtn()
@@ -96,9 +99,10 @@ if (flag) {
       fileName = this.getAttribute("file")
       fileIcon = this.getAttribute("icon")
       fileSize = this.getAttribute("size")
+      extension = this.getAttribute("extension")
       fileSize = bytesToSize(fileSize)
       fileDate = this.getAttribute("date")
-      checkDirFile(filePath, fileName, fileIcon, fileSize, fileDate)
+      checkDirFile(filePath, fileName, fileIcon, fileSize, fileDate, extension)
     });
   }
 } else { 
@@ -153,21 +157,10 @@ const form = document.getElementById("searchForm");
 form.addEventListener("submit", searchResults);
 
 function searchResults (e) {
-  e.preventDefault(); // prevent the form from submitting
+  e.preventDefault(); 
   const input = e.target.querySelector("input[type='text']");
   const inputValue = input.value;
-  // const url = "uploads/";
-  // const data2 = {'search': inputValue};
 
-  // "modules/searchByName.php" +
-  // "?" +
-  // "path=" +
-  // path +
-  // "&" +
-  // "textToSearch=" +
-  // textToSearch,
-  
-  // console.log(data2);
     url = `"http://localhost/indexer/search.php?path=uploads/&search=${inputValue}"`;
     console.log(url);
     
@@ -192,17 +185,16 @@ function searchResults (e) {
               let size = itemReal.size;
               console.log(size)
               let date = itemReal.lastModify;
+              const home = document.getElementById("directoryHome");
+              home.style.display = "none";
 
-              father.innerHTML += `'<li class="list-group-item dirItem" value="${name}" icon="" file="'${name}'" size="${size}" date="${date}">
+              father.innerHTML += `<li class="list-group-item dirItem" value="${name}" icon="" file="'${name}'" size="${size}" date="${date}">
                 <div class="dirItemBOX"><span class="material-symbols-outlined"></span> 
                 <span><a href="uploads/${name}">"${name}"</a></span></div>
                 <div class="dirItemBOX" ><span class="material-symbols-outlined deleteBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${name}" path="uploads/${name}">delete</span>
                 <span class="material-symbols-outlined renameBtn"  data-bs-toggle="modal" data-bs-target="#modal" file="${name}" path="uploads/${name}">edit</span></div>
-            </li>'`;
+            </li>`;
             }
-            
-            // Do something with the data returned from the server
-            // assignBtns(false, data);
         })
         .catch(error => {
             // Handle any errors that occurred during the request
